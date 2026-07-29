@@ -2,13 +2,16 @@ package com.sayan.raftkv;
 
 import java.io.IOException;
 
+import com.sayan.raftkv.models.Command;
+import com.sayan.raftkv.models.CommandType;
+import com.sayan.raftkv.models.LogEntry;
 import com.sayan.raftkv.node.SingleNode;
 
 public class Main {
     public static void main(String[] args) {
         try {
             String path = "wal.log";
-            Command command = new Command(CommandType.SET, "key2", "value1");
+            Command command = new Command(CommandType.SET, "key2643764", "value1");
             LogEntry entry = new LogEntry(1, 11, command);
             SingleNode singlenode = new SingleNode(path, entry);
 

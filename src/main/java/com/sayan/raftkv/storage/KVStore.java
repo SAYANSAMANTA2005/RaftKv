@@ -3,8 +3,8 @@ package com.sayan.raftkv.storage;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.sayan.raftkv.Command;
-import com.sayan.raftkv.CommandType;
+import com.sayan.raftkv.models.Command;
+import com.sayan.raftkv.models.CommandType;
 
 public class KVStore {
     private Map<String, String> store;

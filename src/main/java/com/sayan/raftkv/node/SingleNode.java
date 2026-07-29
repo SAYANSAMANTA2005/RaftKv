@@ -3,8 +3,8 @@ package com.sayan.raftkv.node;
 import java.io.IOException;
 import com.sayan.raftkv.storage.KVStore;
 import com.sayan.raftkv.storage.Wal;
-import com.sayan.raftkv.Command;
-import com.sayan.raftkv.LogEntry;
+import com.sayan.raftkv.models.Command;
+import com.sayan.raftkv.models.LogEntry;
 
 public class SingleNode {
     // entry object to store the log entry

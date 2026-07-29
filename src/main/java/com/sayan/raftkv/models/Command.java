@@ -1,4 +1,4 @@
-package com.sayan.raftkv;
+package com.sayan.raftkv.models;
 
 public class Command {
     private CommandType type;
@@ -14,26 +14,30 @@ public class Command {
         this.key = key;
         this.value = value;
     }
-    //getters
-    public CommandType getType(){
+
+    // getters
+    public CommandType getType() {
         return type;
     }
-    public String getKey(){
+
+    public String getKey() {
         return key;
     }
-    public String getValue(){
+
+    public String getValue() {
         return value;
     }
-    //setters
-    public void setType(CommandType type){
-        this.type=type;
+
+    // setters
+    public void setType(CommandType type) {
+        this.type = type;
     }
-    public void setKey(String key){
-        this.key=key;
+
+    public void setKey(String key) {
+        this.key = key;
     }
-    public void setValue(String value){
-        this.value=value;
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }
-    
-

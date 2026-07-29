@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sayan.raftkv.LogEntry;
+import com.sayan.raftkv.models.LogEntry;
 
 public class Wal {
     private String path;
