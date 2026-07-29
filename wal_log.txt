@@ -1,0 +1,7 @@
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key","value":"value2"}}
+{"term":11,"index":1,"command":{"type":"DELETE","key":"key","value":"value2"}}
