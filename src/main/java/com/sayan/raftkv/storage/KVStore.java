@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.sayan.raftkv.Command;
+import com.sayan.raftkv.CommandType;
 
 public class KVStore {
     private Map<String, String> store;
@@ -20,6 +21,15 @@ public class KVStore {
             case SET:
                 store.put(command.getKey(), command.getValue());
                 break;
+            /*
+             * Current Problem with DELETE -->
+             * once a key's value is CHanged mutiple times
+             * 
+             * THen Ideally after deleting the key,is not much useful operation
+             * 
+             * U need if the last operation on the key is removed
+             * --> then the state of value of that particular key
+             */
             case DELETE:
                 store.remove(command.getKey());
                 break;
