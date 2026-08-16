@@ -3,9 +3,13 @@ package com.sayan.raftkv.network;
 import java.io.*;
 import java.net.*;
 import java.lang.String;
+
+import com.sayan.raftkv.RaftNode.RaftNode;
+import com.sayan.raftkv.RaftNode.NodeState;
 import com.sayan.raftkv.models.LogEntry;
 import com.sayan.raftkv.node.SingleNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sayan.raftkv.Config.GlobalVar;
 
 public class Reciever {
     private int port;
@@ -32,7 +36,8 @@ public class Reciever {
             Socket socket = serverSocket.accept();
             System.out.println("Client connected from: " + socket.getRemoteSocketAddress());
 
-            // Handle each client in a separate thread so multiple nodes can send at the same time
+            // Handle each client in a separate thread so multiple nodes can send at the
+            // same time
             new Thread(() -> {
                 try {
                     BufferedReader reader = new BufferedReader(
@@ -40,7 +45,7 @@ public class Reciever {
                     // take input from Sender as Json --> convert it to Object
                     String json;
                     ObjectMapper mapper = new ObjectMapper();
-                    
+
                     while ((json = reader.readLine()) != null) {
                         LogEntry entry = mapper.readValue(json, LogEntry.class);
 
@@ -51,7 +56,13 @@ public class Reciever {
                         node.applyToKVStore();
 
                         System.out.println("Received message: " + json);
+                        /*
+                         * // if any msg is received then node is follower
+                         * // RaftNode.nodeState = NodeState.FOLLOWER;
+                         */
+
                     }
+                    GlobalVar.msgRecived = true;
 
                     socket.close();
                     System.out.println("Client connection closed.");
@@ -59,6 +70,7 @@ public class Reciever {
                     e.printStackTrace();
                 }
             }).start();
+
         }
     }
     /*

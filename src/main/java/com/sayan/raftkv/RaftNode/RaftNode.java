@@ -9,12 +9,24 @@ import com.sayan.raftkv.models.CommandType;
 import com.sayan.raftkv.models.LogEntry;
 import com.sayan.raftkv.network.Reciever;
 import com.sayan.raftkv.network.Sender;
+import com.sayan.raftkv.RaftNode.NodeState;
 
 public class RaftNode {
     Config config;
+    NodeState nodeState;
+    private long currentTerm;
+    public int electionTimeout;// time period for candidate to become leader
+    // double heartBeatTime;//time period for leader to send heartBeat
 
     public RaftNode(Config config) {
         this.config = config;
+        // INITIALISE EACH NODE --> as FOLLOWER
+        this.nodeState = NodeState.FOLLOWER;
+        this.electionTimeout = 100000;// Math.random();//random election time for follower
+    }
+
+    public void becomeCandidate() {
+        this.nodeState = NodeState.CANDIDATE;
     }
 
     public LogEntry generateCMD() {
@@ -48,7 +60,8 @@ public class RaftNode {
                 }
                 sender.close();
             } catch (java.net.ConnectException e) {
-                System.out.println("Peer " + peer.getNodeId() + " (" + peer.getHost() + ":" + peer.getPort() + ") is offline.");
+                System.out.println(
+                        "Peer " + peer.getNodeId() + " (" + peer.getHost() + ":" + peer.getPort() + ") is offline.");
             }
         }
 
@@ -57,7 +70,7 @@ public class RaftNode {
 
     }//
 }//
- 
+
 /*
  * Each RaftNode has its own
  * ip

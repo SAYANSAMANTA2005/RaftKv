@@ -9,6 +9,7 @@ import com.sayan.raftkv.network.Sender;
 import com.sayan.raftkv.network.Reciever;
 import com.sayan.raftkv.Config.Config;
 import com.sayan.raftkv.Config.ConfigLoader;
+import com.sayan.raftkv.Config.GlobalVar;
 import com.sayan.raftkv.RaftNode.RaftNode;
 
 /*
@@ -42,7 +43,6 @@ public class Main {
             RaftNode raftnode = new RaftNode(config);
             Thread receiverThread = new Thread(() -> {
                 try {
-
                     raftnode.startReciver();
                     // Reciever reciever = new Reciever(config.port,config.walpath);
                     // reciever.start();
@@ -55,16 +55,42 @@ public class Main {
             // Give Receiver thread a moment to bind the socket and start listening
             Thread.sleep(500);
 
-            // 2. Sender connects to Receiver and transmits the LogEntry
-            // i will implement this Sender part later
-            // Sender sender = new Sender(config.hostip, config.port, entry);
-            while (true) {
-                // infinte no sending signal to peers
-                raftnode.SendServer();
-                System.out.println("All sends attempted.");
-                Thread.sleep(3000); // Wait 3 seconds before next round of sends
-            }
+            // -------------------------------
+            // 2. Election Timer Thread
+            // -------------------------------
+            Thread electionThread = new Thread(() -> {
+                try {
+                    long start = System.nanoTime();
+                    // start a whileloop to keep checking the election time for follower
+                    while (true) {
+                        long currtime = System.nanoTime() - start;
+                        if (currtime > raftnode.electionTimeout) {
+                            System.out.println("Node is Converting to Candidate");
+                        } else if (GlobalVar.msgRecived) {
+                            // reseting the varibles like they r starting at this exact moment
+                            GlobalVar.msgRecived = false;
+                            start = System.nanoTime();
+                        }
 
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            });
+            electionThread.start();
+            // 2. Sender connects to Receiver and transmits the LogEntry
+            // i will implement this Sender pary
+            // t later
+            // Sender sender = new Sender(config.hostip, config.port, entry);
+            /*
+             * while (true) {
+             * // infinte no sending signal to peers
+             * raftnode.SendServer();
+             * System.out.println("All sends attempted.");
+             * Thread.sleep(3000); // Wait 3 seconds before next round of sends
+             * }
+             * 
+             */
         } catch (Exception e) {
             e.printStackTrace();
         }
