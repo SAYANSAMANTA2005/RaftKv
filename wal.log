@@ -6,3 +6,5 @@
 {"term":11,"index":1,"command":{"type":"SET","key":"key2","value":"value1"}}
 {"term":11,"index":1,"command":{"type":"SET","key":"key2","value":"value1"}}
 {"term":11,"index":1,"command":{"type":"SET","key":"key2643764","value":"value1"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key2643764","value":"value1"}}
+{"term":11,"index":1,"command":{"type":"SET","key":"key2643764","value":"value1"}}
