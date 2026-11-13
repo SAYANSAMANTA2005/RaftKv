@@ -120,6 +120,8 @@
        WAL                     WAL
         │                       │
      KVStore                KVStore
+
+
 ```
 
 ## Final Goal
